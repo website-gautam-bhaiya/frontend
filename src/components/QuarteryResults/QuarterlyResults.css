@@ -1,0 +1,22 @@
+
+
+.qtr--btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5%;
+}
+
+
+.empty--section {
+
+    display: grid;
+    place-items: center;
+}
+
+.empty--section h3 {
+
+    font-family: var(--ff-secondary);
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 2rem;
+} 

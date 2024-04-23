@@ -1,0 +1,17 @@
+
+
+.add--author--container {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+    place-content: center; 
+    padding: 1%;
+}
+
+.add--author--container h1 {
+    font-family: var(--ff-secondary);
+}
+
+label {
+    font-family: var(--ff-secondary);
+}  

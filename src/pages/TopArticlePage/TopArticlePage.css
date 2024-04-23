@@ -1,0 +1,20 @@
+
+.top--articles--heading h1 {
+        
+    font-family: var(--ff-heading);    
+    margin-bottom: 2%;
+    padding: 2% 0;
+    text-align: center;
+    
+}
+
+
+@media (min-width: 1000px) {
+    
+    .articles--list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+    } 
+
+}

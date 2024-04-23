@@ -1,0 +1,67 @@
+.login--page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    
+    background-image:  linear-gradient(to bottom, rgba(0, 0, 0, 0.6),  rgba(0,0,0,0.5)),url('./../../assets/images/back.jpg'); 
+    background-repeat:no-repeat ;
+    background-size: cover;
+    isolation: isolate;
+}
+
+.login--about--container {
+    
+    padding: 5%;
+    text-align: center; 
+    background-color: #000;
+    color: #fff;
+}
+
+.login--about--container h2 {
+    font-family: var(--ff-heading);
+}
+
+.login--page--container { 
+    margin: auto;
+    width: 80%;
+}
+
+.login--about--container::after {
+    content: '';
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute; 
+    backdrop-filter: blur(10px); 
+}
+
+.img--nivesh {
+    display: none; 
+}
+
+
+@media (min-width: 1000px) {
+    
+    .login--page {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .login--page--container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    
+
+    .img--nivesh {
+ 
+        width: 30%;
+        height: 60%;
+        transform: rotate(15deg);
+    }
+}

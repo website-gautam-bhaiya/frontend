@@ -1,0 +1,69 @@
+
+.books--page--container {
+    display: grid;
+    grid-template-columns: 1fr; 
+}
+
+.books--container {
+    display: grid; 
+    place-items: center; 
+}
+ 
+.book {
+    display: grid;
+    place-items: center;
+    padding: 0.5rem;
+}
+
+.book--about {
+
+    text-align: center;
+    margin: 1rem 0 ;
+    font-family: var(--ff-secondary);
+}
+
+
+.book--title {
+    font-family: var(--ff-heading);
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.book--author {
+
+    color: rgba(0, 0, 0, 0.3);
+    font-weight: 900;
+    font-size: 1.25rem;
+}
+
+
+.book--option {
+    font-weight: 900;
+}
+ 
+
+
+.thumbs--up {
+    color: lightgreen;
+}
+
+.thumbs--down {
+    color: red;
+}
+
+
+@media (min-width: 1000px) {
+    .books--page--container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); 
+    }
+    
+    .books--container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        place-items: center;
+        grid-column: 2 / span 2;
+    }
+    
+    
+}

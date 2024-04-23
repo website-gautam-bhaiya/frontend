@@ -1,0 +1,135 @@
+
+
+.user--name {
+
+    font-family: var(--ff-secondary);
+    font-size: 3rem;
+}
+
+.user--role {
+    font-size: 30%;
+    color: rgba(23, 23, 23, 0.4);
+}
+
+.user--email {
+    font-family: var(--ff-secondary);
+    font-size: 1.25rem;
+}
+
+.account--container {
+    display: grid;
+    grid-template-columns: 1fr ;  
+    place-items: center;
+    gap: 1.25rem;
+    padding: 5%; 
+}
+ 
+
+.acc--img, .acc--about, .acc--btns, .update--pass--form {
+    grid-column:1 / span 1;
+}
+
+.acc--btns button, .update--pass--form button {
+    font-family: var(--ff-secondary);
+    color: #fff;
+    border: 0;
+    border-radius: 2rem;
+    padding: 2% 5%;
+    margin: 2% 0;
+    transition: opacity 300ms ease-in-out;
+    cursor: pointer;
+    margin: 1%;
+}
+
+.acc--btns button:hover, .update--pass--form button:hover {
+    opacity: 0.8;
+}
+
+.edit--btn {
+    background-color: blueviolet;
+}
+
+.save--btn {
+    background-color: green;
+}
+
+.cancel--btn {
+    background-color: red;
+}
+
+
+.update--btn {
+    background-color: orange;
+}
+
+form {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 1.25rem; 
+    padding: 5% 0;
+}
+
+
+.update--pass--form input { 
+    align-self: flex-start; 
+    padding: 3% 0;
+    font-family: var(--ff-secondary);
+    letter-spacing: 1.5px;
+    font-size: 1.125rem;
+    border: 0;
+    border-bottom: 1px solid #000;
+    outline: none;
+    margin: 0.25rem 0;
+    transition: transform 300ms ease-in-out;
+} 
+
+.update--pass--form input::placeholder {
+    color: rgba(0, 0, 0, 0.395);
+}
+ 
+ 
+.acc--about, .acc--btns { 
+    text-align: center;
+}
+
+.articles--published {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 5% 0; 
+    font-family: var(--ff-secondary);
+    border-top: 2px solid rgba(144, 137, 137, 0.395);
+    padding: 5% 0;
+}
+ 
+
+
+@media (min-width: 1000px) {
+    
+    .account--container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .acc--img {
+        grid-column: 1 / span 1;  
+        align-self: start;
+    }
+
+    .acc--content {
+        
+        grid-column: 2 /span 1;
+    }
+
+    .acc--about, .acc--btns, .update--pass--form {
+        grid-column:2 / span 2;
+    }
+
+    .articles--published {
+        display: grid; 
+        grid-column: 1 /span 2;
+        place-items: center;
+    }
+ 
+
+}

@@ -1,0 +1,19 @@
+
+
+.privacy--terms--page--container {
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.privacy--terms--page--container h1 {
+    font-family: var(--ff-heading);
+    font-size: 3rem;
+}
+
+
+.privacy--terms--page--container p {
+    font-family: var(--ff-secondary);
+    white-space: pre-line;
+}

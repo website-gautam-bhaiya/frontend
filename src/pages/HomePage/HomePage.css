@@ -1,0 +1,63 @@
+ 
+.ad--section { 
+    justify-content: center;
+    grid-column: span 2;
+}
+
+
+.top--section
+{   
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    
+}
+
+.gainers--losers {
+    display: none;   
+}
+
+
+
+@media (min-width: 1000px) {
+ 
+    
+    .homepage--body {
+        display: grid; 
+        grid-template-columns: 1fr; 
+        padding: 0 5%;
+        margin: 2% 0;
+
+    }
+
+    .top--section { 
+        display: grid; 
+        grid-template-columns: repeat(4, 1fr);   
+    } 
+ 
+    .articles--section {
+        
+        margin: 5% 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);  
+    } 
+
+    header {
+        top: 0;
+        position: sticky;
+        position: -webkit-sticky;
+        z-index: 10000;
+    }
+    .ad--section {  
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column: 2 /span 2;
+    }
+
+    .ad--section aside {
+        grid-column: 2 / span 2;
+    }
+
+
+ 
+}

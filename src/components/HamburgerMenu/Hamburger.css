@@ -1,0 +1,77 @@
+
+
+.hamburger--nav {
+    
+    padding: 1rem 0;
+    position: fixed;
+    background-color: #fff;
+
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+     
+    box-shadow: 11px 23px 200px 3px #4a4848;
+
+}
+
+.close--btn {
+    align-self: end;
+    font-size: var(--size-icon);
+    padding: 2%;
+    cursor: pointer;
+    transition: opacity 300ms ease-in;
+}
+
+.close--btn:hover {
+    opacity: 0.5;
+}
+
+
+.categories, .myAccount{ 
+    margin: 1rem 0;
+    min-width: 14rem;
+    max-width: 18rem; 
+}
+
+.hamburger--nav h2{
+    font-family: var(--ff-heading) ;
+}
+
+.hamburger--nav span {
+    font-family: var(--ff-secondary);   
+    font-weight: bold;
+}
+
+.options--list {
+     
+    gap: 0.5rem;
+    padding: 1rem; 
+    align-items: start;
+}
+
+.options--list a {
+    color: #000;
+    border: 1px solid rgba(0,0,0,0);
+    transition: border-bottom 250ms ease-in-out;
+}
+
+.options--list a:hover {
+    border-bottom: 1px solid #000;
+}
+
+.categories h2, .myAccount h2 {
+    background-color: #000;
+    color: #fff;
+}
+
+ 
+.btns-- {
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+}
+
+.register--btns {
+    gap: 0.25rem;
+}

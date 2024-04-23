@@ -1,0 +1,33 @@
+
+nav {
+    display: none;
+}
+
+@media (min-width: 1000px) {
+
+    nav {
+        display: block;
+    }
+
+    .nav--links {
+        
+        justify-content: center;
+        background-color: #000;
+        gap: 2rem;
+        padding: .5rem 0;
+    }
+    
+    .nav--links a {
+        
+        font-family: var(--ff-heading); 
+        font-size: 1rem;
+        color: #fff; 
+        border-bottom: 3px solid rgba(255,255,255,0);
+        transition: border-bottom 250ms ease-in-out;
+    }
+
+    .nav--links a:hover {
+        border-bottom: 3px solid rgba(255,255,255,0.6);
+    }
+    
+}

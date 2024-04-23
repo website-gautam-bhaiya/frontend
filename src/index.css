@@ -1,0 +1,204 @@
+:root { 
+
+  --ff-heading: 'DM Serif Display', serif;
+  --ff-body: sans-serif;
+  --ff-secondary: 'DM Sans', sans-serif;
+
+  --bg--secondary: hsl(0, 2, 16);
+  --bg--main: hsl(0, 43, 91);
+  --bg-ad: hsl(0, 2%, 79%);
+
+  --size-icon: clamp(1rem, 4rem, 1.5rem );
+  --size-heading: clamp(1rem, 3rem, 2.25rem)
+
+  --fs-title-mobile: 1rem;
+  --fs-tags-mobile: 0.65rem;
+}
+
+/* ------------------------- CSS Reset ------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,body, #root {
+  height: 100vh;
+}
+
+ol, ul {
+  list-style-type: none;
+}
+
+
+body {  
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a{
+  text-decoration: none;
+}
+
+
+/*------------------------ Utility Classes ---------------------------- */
+
+.flex--col {
+  
+  display: flex;
+  flex-direction: column;
+
+}
+
+.flex-col--reverse {
+  
+  display: flex;
+  flex-direction: column-reverse;
+
+}
+
+.flex--row {
+  
+  display: flex;
+  flex-direction: row;
+
+}
+
+.flex-row--reverse {
+  
+  display: flex;
+  flex-direction: row-reverse;
+
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+
+.fade--x {
+  animation: slideLeft 1s 1 ;
+}
+ 
+.add--btn, .acc--btn, .logout--btn, .post--btn, input::file-selector-button, .remove--btn, .edit--article--btn, .quarter--btn, .btn--active {
+  border-radius: 2rem; 
+  border:0;
+  padding: 0.5rem 1rem; 
+  font-size: 1rem; 
+  cursor: pointer;
+  transition: opacity  300ms ease-in-out; 
+  font-family: var(--ff-secondary);
+}
+
+.add--btn:hover, .acc-btn:hover, .logout--btn:hover, .post--btn:hover, input::file-selector-button:hover, .remove--btn:hover, .edit--article--btn:hover { 
+  opacity: 0.5; 
+}
+
+input::file-selector-button {
+  font-family: var(--ff-secondary);
+  color: #fff;
+  background-color: #030303; 
+  
+}
+
+.btn--active {
+  background-color: rgba(53, 138, 250, 0.532) ;
+
+  color:rgba(233, 233, 233,1);
+  font-size: 0.75rem;
+}
+
+.quarter--btn {
+  font-size: 0.75rem;
+  background-color: inherit;
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.175);
+}
+
+.edit--article--btn {
+  color: blue;
+  background: inherit; 
+
+}
+
+.remove--btn {
+  background: inherit;
+  color: rgba(198, 0, 36, 0.85);;
+}
+
+
+.add--btn {
+
+  background-color: rgba(255, 165, 0, 0.7);
+  color: #fff; 
+}
+
+.acc--btn {
+  background-color: rgba(87, 87, 190, 0.85);
+  color: #fff; 
+} 
+
+.logout--btn {
+  background-color: rgba(198, 0, 36, 0.85);
+  color: #fff;
+}
+
+.post--btn {
+    background-color: green;
+    color: #fff;
+}
+
+.err--label {
+  color: red;
+  font-family: var(--ff-secondary);
+  font-size: 0.85rem;
+}
+
+.feedback--label {
+  color: green;
+  font-family: var(--ff-secondary);
+  font-size: 0.85rem;
+}
+
+.mess--label {
+  color: green;
+  font-family: var(--ff-secondary);
+}
+
+.label--icon {
+  transform: translateY(5px);
+}
+
+
+/* Animations */
+
+@keyframes slideLeft {
+    
+  0%{
+      transform: translateX(500px);
+  }
+
+  100%{
+      transform: translateX(0);
+  }
+
+}
+
+@keyframes pulse {
+    
+  0%{
+    background-color: rgba(128, 128, 128, 0.2); 
+  }
+
+  50%{
+    background-color: rgba(128, 128, 128, 0.4); 
+  }
+
+  100% {
+    background-color: rgba(128, 128, 128, 0.2); 
+  }
+
+}

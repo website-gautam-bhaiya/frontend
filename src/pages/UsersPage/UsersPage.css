@@ -1,0 +1,38 @@
+
+.users--container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.users--container h1 {
+    
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25) ;
+    font-family: var(--ff-heading);
+    text-align: center;
+}
+
+@media (min-width: 1000px) {
+    
+    .users--container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin: 2%;
+    }
+    
+    .profiles {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        grid-column: 2/ span 2; 
+    }
+    
+    .users--container h1 {
+    
+        text-align: center;
+        font-family: var(--ff-heading);
+        grid-column: 2/ span 2;
+        margin: 2%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25) ;
+    }
+}

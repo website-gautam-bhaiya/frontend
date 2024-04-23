@@ -1,0 +1,87 @@
+
+.gainers--losers{
+    display: none;
+}
+
+@media (min-width: 1000px) {
+
+    .gainers--losers {  
+         
+        display: block;    
+        font-family: var(--ff-secondary); 
+        font-size: 0.55rem;
+        box-shadow: 10px 5px 20px 2px rgba(0, 0, 0, 0.125);
+        border-radius: 2%; 
+        padding: 5% 0;
+        align-self: start;
+    }
+
+    .box--heading {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+    }
+    
+    
+    .gainers--heading, .losers--heading {
+        text-align: center;  
+        cursor: pointer;
+    }
+
+    .gainers--heading h2, .losers--heading h2 {
+        font-size: 1.25rem;
+    }
+
+    
+    .gainers--heading:hover, .losers--heading:hover {
+        border-bottom: 2px solid rgba(255, 165, 0, 0.35);
+    }
+
+    td {
+        font-size: .85rem;
+    }
+
+    th {
+        font-size: 0.95rem;
+    }  
+    
+    th { 
+        border-bottom: 2px solid orangered;
+    }
+
+    table {
+        padding: 2%;
+        width: 100%; 
+        border-spacing: 0 15px;
+    }
+    
+    .stock--table {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5% 0;
+        text-align: center;
+    }   
+  
+    
+    .fadeDown{   
+        opacity: 1;
+        animation: fadeDown 800ms 100ms ease-in-out 1; 
+    }
+
+    @keyframes fadeDown {
+        
+        0%{
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+ 
+    
+}

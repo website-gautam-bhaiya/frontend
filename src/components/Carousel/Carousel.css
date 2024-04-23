@@ -1,0 +1,124 @@
+ 
+.carousel--arrow {
+    font-size:2rem;
+    align-self: center;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 300ms ease-in-out;
+
+}
+
+.carousel--arrow:hover {
+
+    opacity: 0.5;
+}
+
+
+.top--news { 
+    max-height: 4rem;
+    background: linear-gradient(to right, orangered, orangered, rgba(255,255,255, 0.1)); 
+    padding: 1% 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    cursor: pointer;
+
+    font-family: var(--ff-heading);
+    color: #fff; 
+ 
+}
+
+.top--news h1 {
+     
+    transition: letter-spacing 400ms ease;
+}
+
+.top--news h1:hover {
+    letter-spacing: 2px; 
+}
+
+.carousel--body {  
+    justify-content: space-between;     
+
+}
+
+
+.carousel {
+    min-height: 25rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    grid-column: span 2; 
+    display: grid;
+    grid-template-columns: 1fr; 
+    border-radius: 2%;
+
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.carousel a {
+    color: #fff;
+    font-family: var(--ff-heading);
+    font-size: .9rem;
+    transition: border-bottom 400ms ease-in;
+}
+
+.carousel a:hover {
+    text-decoration: underline;
+    font-family: var(--ff-heading); 
+}
+
+
+
+.carousel--content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; 
+    margin: 5% ;
+}
+
+.carousel--content span {
+    color: #c2bebe; 
+    font-size: 0.8rem;
+}
+
+.carousel--index {
+    width: 10px;
+    height: 10px;
+    background-color:  rgba(255, 255, 255, 0.3);
+    border-radius: 9999px;
+    transition: background-color 200ms ease-in-out;
+}
+
+.carousel--index:hover {
+    
+    background-color:  rgba(255, 255, 255, 0.6);
+}
+
+.carousel--nav {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    cursor: pointer;
+    gap: 1.25rem;
+}
+ 
+
+.active {
+    background-color: #fff;
+}
+
+@media (min-width: 1000px) {
+    
+    .carousel {
+        grid-column:  2 / span 2; 
+        
+    } 
+    .carousel--content a {
+        font-size: 1.125rem;
+    }
+
+    
+
+}

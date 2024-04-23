@@ -1,0 +1,83 @@
+
+
+.form--container {
+    background-color: #fff;
+}
+
+form {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 1.25rem; 
+    padding: 8%;
+}
+
+.loginpage--form span {
+    cursor: pointer;
+}
+
+ 
+ 
+
+.change-placeholder::placeholder {
+    font-size: 70%;
+    transform: translateY(-14px);
+}
+
+.form--container {
+    border-radius: 8%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 10px 5px 20px 2px rgba(0, 0, 0, 0.095); 
+
+}
+
+.form--container button { 
+
+    font-family: var(--ff-secondary);
+
+    background-color: #000;
+    color: #fff;
+    border: 0;
+    padding: 1.75% 3%;
+    border-radius: 2rem;
+    transition: opacity 300ms ease-in-out;
+    cursor: pointer;
+}
+ 
+ 
+
+.form--container h1 {
+    padding: 5% 0;
+    text-align: center;
+    font-family: var(--ff-secondary);
+    letter-spacing: 20px;
+}
+
+.form--container a {
+    color: #000;
+    font-family: var(--ff-secondary);
+    font-size: 0.85rem;
+    transition: text-decoration 300ms ease-in-out;
+}
+
+.form--container a:hover {
+    
+    text-decoration: underline;
+}
+
+
+.form--container button:hover{
+    opacity: 0.75;
+}
+
+ 
+
+@media (min-width: 1000px) {
+
+    .form--container { 
+        border-radius: 8%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}

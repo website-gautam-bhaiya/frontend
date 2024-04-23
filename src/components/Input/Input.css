@@ -1,0 +1,38 @@
+
+.input--container { 
+    display: flex;
+    flex-direction: row;  
+    position: relative;
+    
+}
+
+.input--container label { 
+    
+    font-size: 1.25rem;
+    position: absolute; 
+    cursor: pointer;    
+    right: 0;
+    transform: translateX(5px);
+}
+
+
+.input--container input { 
+     
+    padding:0.5rem ;
+    font-family: var(--ff-secondary);
+    letter-spacing: 1.5px;
+    font-size: 1.125rem;
+    border: 0;
+    border-bottom: 1px solid #000;
+    outline: none;
+    margin: 0.25rem 0;
+    transition: transform 300ms ease-in-out;
+} 
+
+.input--container input::placeholder {
+    color: rgba(0, 0, 0, 0.395);
+}
+
+.input--container input:disabled {
+    background-color: rgba(215, 212, 212, 0.3);
+}

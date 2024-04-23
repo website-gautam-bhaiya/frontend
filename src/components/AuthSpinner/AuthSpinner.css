@@ -1,0 +1,40 @@
+
+.auth--spinner {
+    
+    width: 3rem;
+    height: 3rem;
+    border-radius: 3rem; 
+    background-color: #fff;
+    border-bottom: 5px dotted rgb(194, 157, 228);
+    border-left: 5px dotted rgb(194, 157, 228);
+    animation: spin 1.25s ease-in-out infinite;
+}
+
+.auth--page {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+
+.auth--comp {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    border: 2px solid lightblue;
+    border-radius: 0.5rem;
+    padding: 5%;
+    margin: 10% ;
+    grid-column: 2 / span 1; 
+
+}
+
+.auth--comp h1 {
+    font-family: var(--ff-secondary);  
+    margin: 0 2% ;
+}
+
+@keyframes spin {
+
+    0% { transform: rotate(0deg); } /* Starting position */
+    100% { transform: rotate(360deg); } /* Ending position */
+}

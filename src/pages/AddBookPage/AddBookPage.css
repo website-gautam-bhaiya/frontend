@@ -1,0 +1,16 @@
+ 
+.checkboxes {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    gap: 1.5rem; 
+    line-height: 1;
+    margin: 2% 0;
+}
+
+.checkbox {
+    margin: 5px;
+}
+ 
+
+

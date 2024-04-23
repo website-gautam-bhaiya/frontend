@@ -1,0 +1,32 @@
+
+.profile--card {
+    background-color: rgba(120, 115, 115, 0.08125); 
+    padding: 5%;
+}
+
+
+.profile--card img {
+
+    width: 20%;
+}
+
+.profile--content {
+    display: flex;
+    flex-direction: row;
+    gap: 1.25rem; 
+}
+
+.user--about {
+    font-family: var(--ff-secondary);
+    align-self: center;
+}
+
+.profile--card button {
+    background-color: red;
+    color: #fff;
+    font-size: 0.75rem;
+}
+
+.delete--confirm {
+    font-family: var(--ff-secondary);
+}
