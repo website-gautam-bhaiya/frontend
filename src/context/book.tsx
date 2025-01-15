@@ -1,14 +1,15 @@
  
 import { ReactNode, createContext, useState } from "react"
 import useAuth from "../hooks/useAuth"
-import { axiosInstance } from "../assets/axiosInstance"
+import axios from "axios"
 import { AxiosError } from "axios"
 
 interface Book {
 
     title: string,
     ISBNCode: number
-    author: string
+    author: string,
+    link: string
     options: {
         beginner: boolean
         experiencedTrader: boolean
@@ -27,6 +28,7 @@ type GlobalBooks = {
         title: string, 
         author: string, 
         ISBNCode: number, 
+        link: string, 
         options: { 
             selfHelp: boolean, 
             experiencedTrader: boolean, 
@@ -58,20 +60,13 @@ export default function BooksProvider( { children } : { children: ReactNode} ) {
 
         try {
             
-            // const response = await axios({
-            //     url: "https://127.0.0.1:3000/api/v1/books/all",
-            //     method: "GET",
-            //     headers: {
-            //         'Content-Type': "application/json"
-            //     }
-            // })
-
-            const response = await axiosInstance.get('/books/all', {
+            const response = await axios({
+                url: "https://news-api-qsji.onrender.com/api/v1/books/all",
+                method: "GET",
                 headers: {
-                    "Content-Type": "application/json"
-                },
-            })
-            
+                    'Content-Type': "application/json"
+                }
+            }) 
             
 
             if (response.status === 200) {
@@ -105,6 +100,7 @@ export default function BooksProvider( { children } : { children: ReactNode} ) {
         title: string, 
         author: string, 
         ISBNCode: number, 
+        link: string,
         options: { 
             selfHelp: boolean, 
             experiencedTrader: boolean, 
@@ -114,24 +110,19 @@ export default function BooksProvider( { children } : { children: ReactNode} ) {
         {
             
             try {
-                
-                // const response = await axios({
-                //     url: "https://localhost:3000/api/v1/books/newBook",
-                //     method: "POST",
+                console.log(data);
                     
-                //     withCredentials: true,
-                //     headers: {
-                //         'Content-Type': "application/json"
-                //     },
-                //     data,
-                // })
-                
-                const response = await axiosInstance.post('/books/newBook',data, {
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                const response = await axios({
+                    url: "https://news-api-qsji.onrender.com/api/v1/books/newBook",
+                    method: "POST",
+                    
                     withCredentials: true,
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                    data,
                 })
+                 
 
                 if (response.status === 200) { 
                     setErr({...err, isErr: false, message: '', type: '', statusCode: 200})

@@ -42,7 +42,7 @@ type GlobalNews = {
     getArticlesPublishedBy: (id: string) => void
     postArticle: (article: FormData) => Promise<boolean>
     updateArticle: (id: string,  data: {title?: string, body?: string, categories?: string} ) => Promise<boolean>
-    deleteArticle: (id: string ) => void
+    deleteArticle: (id: string ) => Promise<boolean>
     getArticlesByCategories : (category: string) => void
     getFrontPageNews: () => void
 }
@@ -63,7 +63,7 @@ export const NewsContext = createContext<GlobalNews>({
     getArticlesPublishedBy: () => {},
     postArticle: () => Promise.reject(),
     updateArticle: () => Promise.reject(),
-    deleteArticle: () => {},
+    deleteArticle: () => Promise.reject(),
     getArticlesByCategories: () => {},
     getFrontPageNews: () => {}
 })
@@ -107,7 +107,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
 
             const response = await axios({
                 method: "GET",
-                url:`https://localhost:3000/api/v1/articles/${id}`,  
+                url:`https://news-api-qsji.onrender.com/api/v1/articles/${id}`,  
                 headers: 
                     {  
                         'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
         try {
 
             const response = await axios({
-                url: `https://localhost:3000/api/v1/articles/publishedBy/${userId}`,
+                url: `https://news-api-qsji.onrender.com/api/v1/articles/publishedBy/${userId}`,
                 method: "GET",
                 headers: 
                     {  
@@ -164,7 +164,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
         try {
             const response = await axios({
                 method: "POST",
-                url:'https://localhost:3000/api/v1/articles',  
+                url:'https://news-api-qsji.onrender.com/api/v1/articles',  
                 headers: 
                     {  
                         'Content-Type':'multipart/form-data',
@@ -197,7 +197,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
         try {
             await axios({
                 method: "DELETE",
-                url:`https://localhost:3000/api/v1/articles/${id}`,  
+                url:`https://news-api-qsji.onrender.com/api/v1/articles/${id}`,  
                 headers: 
                     {  
                         'Content-Type':'application/json',
@@ -207,6 +207,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
     
             })
              
+            return true
             
         }
 
@@ -225,7 +226,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
         try {
             const response = await axios({
                 method: "PATCH",
-                url:`https://localhost:3000/api/v1/articles/${id}`,  
+                url:`https://news-api-qsji.onrender.com/api/v1/articles/${id}`,  
                 headers: 
                     {  
                         'Content-Type':'application/json',
@@ -261,7 +262,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
             
             const response = await axios({
                 method: "GET",
-                url: `https://localhost:3000/api/v1/articles/category/${category}`,
+                url: `https://news-api-qsji.onrender.com/api/v1/articles/category/${category}`,
                 headers: 
                     { 
                         'Content-Type': 'application/json',
@@ -289,7 +290,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
 
             const response = await axios({
                     method: "GET",
-                    url: 'https://localhost:3000/api/v1/articles/frontPageNews',
+                    url: 'https://news-api-qsji.onrender.com/api/v1/articles/frontPageNews',
                     headers: 
                         {  
                             'Content-Type': 'application/json',

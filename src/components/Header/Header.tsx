@@ -18,7 +18,7 @@ const Header = () => {
         <div  className='header'>
             <div className='header--container  '> 
                     <div className="flex--row">
-                        <img className="logo" src = {Logo}  />
+                        <Link to={"/"}><img className="logo" src = {Logo}  /></Link>
                         
                     </div>
 

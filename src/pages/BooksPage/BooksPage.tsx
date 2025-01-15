@@ -9,6 +9,7 @@ import useBooks from '../../hooks/useBooks'
 import { FaThumbsUp } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa"; 
 
+import { FiExternalLink } from "react-icons/fi";
 
 import './BooksPage.css' 
  
@@ -32,6 +33,7 @@ const BooksPage = () => {
                     <p className='book--option'>Beginner {book.options.beginner ? <FaThumbsUp className='thumbs--up' /> : <FaThumbsDown className='thumbs--down' /> }</p>
                     <p className='book--option'>Experienced Trader {book.options.experiencedTrader ? <FaThumbsUp className='thumbs--up' /> : <FaThumbsDown className='thumbs--down' /> }</p>
                 </div>
+                <a href={book.link} target='/blank' className='book--link'>Amazon <FiExternalLink /> </a>
             
             </div>
         </div>

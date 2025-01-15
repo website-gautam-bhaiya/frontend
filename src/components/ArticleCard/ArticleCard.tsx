@@ -15,9 +15,10 @@ const ArticleCard = ( { article, isOperations } : { article: News, isOperations 
     const [isDeleteReq, setisDeleteReq] = useState<boolean>(false)
     const {deleteArticle} = useNews()
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
 
-        deleteArticle(article._id)
+        const isSuccess = await deleteArticle(article._id)
+        if (isSuccess)
         window.location.reload()
     }
 

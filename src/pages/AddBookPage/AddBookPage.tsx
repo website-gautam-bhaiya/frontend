@@ -29,15 +29,17 @@ const AddBookPage = () => {
         const title = target[0].value;
         const author = target[1].value;
         const ISBNCode = target[2].value;
+        const link = target[3].value;
 
         const options = {
-            selfHelp: target[3].checked,
-            experiencedTrader: target[4].checked,
-            beginner: target[5].checked,
+            selfHelp: target[4].checked,
+            experiencedTrader: target[5].checked,
+            beginner: target[6].checked,
         }
-
+ 
         
-        const isSuccess = await publishBook( { title, author, ISBNCode, options } )
+        
+        const isSuccess = await publishBook( { title, author, ISBNCode, link, options } )
         
         if (isSuccess) {
             navigate('/')
@@ -62,6 +64,7 @@ const AddBookPage = () => {
                     <input className='publish--input' placeholder = "Enter Book's title" />
                     <input className='publish--input' placeholder = "Enter Book's author" />
                     <input className='publish--input' placeholder = "Enter Book's ISBN Code" /> 
+                    <input className='publish--input' placeholder = "Enter Book's Link" /> 
 
                     <div className="checkboxes">
                         <div className='checkbox--container'>

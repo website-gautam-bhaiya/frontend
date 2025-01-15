@@ -39,7 +39,8 @@ interface ErrorResponse {
     };
     message: string;
     // Add any other properties you expect in the error response
-  }
+}
+
 interface Auth {
     user: User,
     isLoggedIn: boolean
@@ -162,7 +163,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         
         try {
             const response = await axios({
-                url: 'https://localhost:3000/api/v1/users/refresh',
+                url: 'https://news-api-qsji.onrender.com/api/v1/users/refresh',
                 method: "GET", 
                 withCredentials: true,
                 headers: 
@@ -190,7 +191,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
 
         try {
             const response = await axios({
-                url: 'https://localhost:3000/api/v1/users/login',
+                url: 'https://news-api-qsji.onrender.com/api/v1/users/login',
                 method: "POST", 
                 withCredentials: true,
                 headers: 
@@ -241,7 +242,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
 
         try {
             const response = await axios({
-                url: 'https://localhost:3000/api/v1/users/forgotPassword',
+                url: 'https://news-api-qsji.onrender.com/api/v1/users/forgotPassword',
                 method: "POST",
                 headers: 
                 { 
@@ -272,7 +273,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://localhost:3000/api/v1/users/resetPassword/${token}`,
+                url: `https://news-api-qsji.onrender.com/api/v1/users/resetPassword/${token}`,
                 method: "PATCH",
                 headers: 
                 { 
@@ -323,7 +324,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://localhost:3000/api/v1/users/logout`,
+                url: `https://news-api-qsji.onrender.com/api/v1/users/logout`,
                 method: "GET",
                 withCredentials: true,
                 headers: 
@@ -378,7 +379,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://localhost:3000/api/v1/users/updateMyPassword`,
+                url: `https://news-api-qsji.onrender.com/api/v1/users/updateMyPassword`,
                 method: "PATCH",
                 withCredentials: true,
                 headers: 
@@ -450,7 +451,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
  
         try { 
             const response = await axios({
-                url: `https://localhost:3000/api/v1/users/addAuthor`,
+                url: `https://news-api-qsji.onrender.com/api/v1/users/addAuthor`,
                 method: "POST",
                 withCredentials: true,
                 headers: 
@@ -483,7 +484,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://localhost:3000/api/v1/users/updateMyAccount`,
+                url: `https://news-api-qsji.onrender.com/api/v1/users/updateMyAccount`,
                 method: "PATCH",
                 withCredentials: true,
                 headers: 
@@ -528,7 +529,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://localhost:3000/api/v1/users/getAllAuthors`,
+                url: `https://news-api-qsji.onrender.com/api/v1/users/getAllAuthors`,
                 method: "GET",
                 withCredentials: true,
                 headers: 
@@ -559,7 +560,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try{
 
             const response = await axios({
-                url: `https://localhost:3000/api/v1/users/deleteAuthor/${id}`,
+                url: `https://news-api-qsji.onrender.com/api/v1/users/deleteAuthor/${id}`,
                 method: "DELETE",
                 withCredentials: true,
                 headers: 

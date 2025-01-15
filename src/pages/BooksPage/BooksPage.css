@@ -51,6 +51,20 @@
     color: red;
 }
 
+.book--link {
+
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    font-size: 1.125rem;
+    transition: 200ms ease-in-out;
+    color: rgb(218, 0, 243);
+}
+
+
+.book--link:hover {
+    opacity: .6;
+}
+
 
 @media (min-width: 1000px) {
     .books--page--container {
