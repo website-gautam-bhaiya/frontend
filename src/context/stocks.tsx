@@ -48,7 +48,7 @@ export default function StocksProvider( {children}: {children: ReactNode}) {
     useEffect( () => { 
             axios({
                 method: "GET",
-                url: `https://news-api-qsji.onrender.com/api/v1/stocks/nifty-100`,
+                url: `https://backend-final-self.vercel.app/api/v1/stocks/nifty-100`,
                 headers: 
                     {
                         'Access-Control-Allow-Origin': '*',
