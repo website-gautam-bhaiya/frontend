@@ -61,7 +61,8 @@ export default function BooksProvider( { children } : { children: ReactNode} ) {
         try {
             
             const response = await axios({
-                url: "https://news-api-qsji.onrender.com/api/v1/books/all",
+             
+                url: "https://backend-final-self.vercel.app/api/v1/books/all",
                 method: "GET",
                 headers: {
                     'Content-Type': "application/json"
@@ -113,7 +114,7 @@ export default function BooksProvider( { children } : { children: ReactNode} ) {
                 console.log(data);
                     
                 const response = await axios({
-                    url: "https://news-api-qsji.onrender.com/api/v1/books/newBook",
+                    url: "https://backend-final-self.vercel.app/api/v1/books/newBook",
                     method: "POST",
                     
                     withCredentials: true,
