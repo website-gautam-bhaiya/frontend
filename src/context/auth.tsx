@@ -3,6 +3,8 @@ import { User } from "./news";
 import { useState } from "react"; 
 import axios from "axios";  
 import { AxiosError } from "axios"; 
+const BASE_URL = "https://backend-final-self.vercel.app/api/v1";
+
 
 type GlobalAuth = {
     auth: Auth
@@ -163,7 +165,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         
         try {
             const response = await axios({
-                url: 'https://news-api-qsji.onrender.com/api/v1/users/refresh',
+                url: '${BASE_URL}/users/refresh',
                 method: "GET", 
                 withCredentials: true,
                 headers: 
@@ -191,7 +193,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
 
         try {
             const response = await axios({
-                url: 'https://news-api-qsji.onrender.com/api/v1/users/login',
+                url: '${BASE_URL}/users/login',
                 method: "POST", 
                 withCredentials: true,
                 headers: 
@@ -242,7 +244,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
 
         try {
             const response = await axios({
-                url: 'https://news-api-qsji.onrender.com/api/v1/users/forgotPassword',
+                url: '${BASE_URL}/users/forgotPassword',
                 method: "POST",
                 headers: 
                 { 
@@ -273,7 +275,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://news-api-qsji.onrender.com/api/v1/users/resetPassword/${token}`,
+                url: `${BASE_URL}/users/resetPassword/${token}`,
                 method: "PATCH",
                 headers: 
                 { 
@@ -324,7 +326,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://news-api-qsji.onrender.com/api/v1/users/logout`,
+                url: `${BASE_URL}/users/logout`,
                 method: "GET",
                 withCredentials: true,
                 headers: 
@@ -379,7 +381,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://news-api-qsji.onrender.com/api/v1/users/updateMyPassword`,
+                url: `${BASE_URL}/users/updateMyPassword`,
                 method: "PATCH",
                 withCredentials: true,
                 headers: 
@@ -451,7 +453,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
  
         try { 
             const response = await axios({
-                url: `https://news-api-qsji.onrender.com/api/v1/users/addAuthor`,
+                url: `${BASE_URL}/users/addAuthor`,
                 method: "POST",
                 withCredentials: true,
                 headers: 
@@ -484,7 +486,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://news-api-qsji.onrender.com/api/v1/users/updateMyAccount`,
+                url: `${BASE_URL}/users/updateMyAccount`,
                 method: "PATCH",
                 withCredentials: true,
                 headers: 
@@ -529,7 +531,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try {
 
             const response = await axios({
-                url: `https://news-api-qsji.onrender.com/api/v1/users/getAllAuthors`,
+                url: `${BASE_URL}/users/getAllAuthors`,
                 method: "GET",
                 withCredentials: true,
                 headers: 
@@ -560,7 +562,7 @@ export default function AuthProvider({ children }: {children: ReactNode}) {
         try{
 
             const response = await axios({
-                url: `https://news-api-qsji.onrender.com/api/v1/users/deleteAuthor/${id}`,
+                url: `${BASE_URL}/users/deleteAuthor/${id}`,
                 method: "DELETE",
                 withCredentials: true,
                 headers: 
