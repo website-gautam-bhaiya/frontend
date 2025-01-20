@@ -107,7 +107,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
 
             const response = await axios({
                 method: "GET",
-                url:`https://news-api-qsji.onrender.com/api/v1/articles/${id}`,  
+                url:`https://backend-final-self.vercel.app/api/v1/articles/${id}`,  
                 headers: 
                     {  
                         'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
         try {
 
             const response = await axios({
-                url: `https://news-api-qsji.onrender.com/api/v1/articles/publishedBy/${userId}`,
+                url: `https://backend-final-self.vercel.app/api/v1/articles/publishedBy/${userId}`,
                 method: "GET",
                 headers: 
                     {  
@@ -164,7 +164,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
         try {
             const response = await axios({
                 method: "POST",
-                url:'https://news-api-qsji.onrender.com/api/v1/articles',  
+                url:'https://backend-final-self.vercel.app/api/v1/articles',  
                 headers: 
                     {  
                         'Content-Type':'multipart/form-data',
@@ -197,7 +197,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
         try {
             await axios({
                 method: "DELETE",
-                url:`https://news-api-qsji.onrender.com/api/v1/articles/${id}`,  
+                url:`https://backend-final-self.vercel.app/api/v1/articles/${id}`,  
                 headers: 
                     {  
                         'Content-Type':'application/json',
@@ -226,7 +226,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
         try {
             const response = await axios({
                 method: "PATCH",
-                url:`https://news-api-qsji.onrender.com/api/v1/articles/${id}`,  
+                url:`https://backend-final-self.vercel.app/api/v1/articles/${id}`,  
                 headers: 
                     {  
                         'Content-Type':'application/json',
@@ -262,7 +262,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
             
             const response = await axios({
                 method: "GET",
-                url: `https://news-api-qsji.onrender.com/api/v1/articles/category/${category}`,
+                url: `https://backend-final-self.vercel.app/api/v1/articles/category/${category}`,
                 headers: 
                     { 
                         'Content-Type': 'application/json',
@@ -290,7 +290,7 @@ export default function NewsProvider( { children } : {children: ReactNode} )
 
             const response = await axios({
                     method: "GET",
-                    url: 'https://news-api-qsji.onrender.com/api/v1/articles/frontPageNews',
+                    url: 'https://backend-final-self.vercel.app/api/v1/articles/frontPageNews',
                     headers: 
                         {  
                             'Content-Type': 'application/json',
