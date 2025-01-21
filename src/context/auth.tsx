@@ -25,44 +25,56 @@ interface Error {
   type: string;
 }
 
-type GlobalNews = {
-  news: News[];
-  currentArticle: News | null;
-  articlesPublished: News[] | [];
-  categoryArticles: News[] | [];
+type GlobalAuth = {
+  auth: Auth;
+  err: Error;
+  resetStatus: boolean;
+  authCheck: {
+    isLoading: boolean;
+    isAuthenticated: boolean;
+  };
+  users: User[];
 
-  setNews: React.Dispatch<React.SetStateAction<News[]>>;
-  setCurrentArticle: React.Dispatch<React.SetStateAction<News | null>>;
-  setArticlesPublished: React.Dispatch<React.SetStateAction<News[] | []>>;
-  setCategoryArticles: React.Dispatch<React.SetStateAction<News[] | []>>;
+  setAuth: React.Dispatch<React.SetStateAction<Auth>>;
+  setErr: React.Dispatch<React.SetStateAction<Error>>;
+  setResetStatus: React.Dispatch<React.SetStateAction<boolean>>;
+  setAuthCheck: React.Dispatch<React.SetStateAction<{ isLoading: boolean; isAuthenticated: boolean }>>;
+  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 
-  getArticle: (id: string) => Promise<News | false>;
-  getArticlesPublishedBy: (id: string) => void;
-  postArticle: (article: FormData) => Promise<boolean>;
-  updateArticle: (id: string, data: { title?: string; body?: string; categories?: string }) => Promise<boolean>;
-  deleteArticle: (id: string) => Promise<boolean>;
-  getArticlesByCategories: (category: string) => void;
-  getFrontPageNews: () => void;
+  logIn: (email: string, password: string) => void;
+  forgotPassword: (email: string) => void;
+  resetPassword: (password: string, passwordConfirm: string, token: string) => void;
+  updatePassword: (currentPassword: string, password: string, passwordConfirm: string) => Promise<boolean>;
+  onRefresh: () => void;
+  logout: () => void;
+  getAllUsers: () => void;
+  addNewAuthor: (credentials: { name: string; email: string; password: string; passwordConfirm: string }) => Promise<boolean>;
+  updateMyAccount: (updateData: { name?: string; email?: string }) => Promise<boolean>;
+  deleteAuthor: (id: string) => Promise<boolean>;
 };
 
-export const NewsContext = createContext<GlobalNews>({
-  news: [],
-  currentArticle: null,
-  articlesPublished: [],
-  categoryArticles: [],
-
-  setNews: () => {},
-  setCurrentArticle: () => {},
-  setArticlesPublished: () => {},
-  setCategoryArticles: () => {},
-
-  getArticle: () => Promise.reject(),
-  getArticlesPublishedBy: () => {},
-  postArticle: () => Promise.reject(),
-  updateArticle: () => Promise.reject(),
-  deleteArticle: () => Promise.reject(),
-  getArticlesByCategories: () => {},
-  getFrontPageNews: () => {},
+// Context initialization
+export const AuthContext = createContext<GlobalAuth>({
+  auth: { user: { name: "", profilePhoto: "", email: "", role: "", _id: "" }, isLoggedIn: false },
+  err: { isErr: false, message: "", statusCode: 200, type: "" },
+  resetStatus: false,
+  authCheck: { isAuthenticated: false, isLoading: true },
+  users: [],
+  setAuth: () => {},
+  setErr: () => {},
+  setResetStatus: () => {},
+  setAuthCheck: () => {},
+  setUsers: () => {},
+  logIn: () => {},
+  forgotPassword: () => {},
+  resetPassword: () => {},
+  updatePassword: () => Promise.reject(),
+  onRefresh: () => {},
+  logout: () => {},
+  getAllUsers: () => {},
+  addNewAuthor: () => Promise.reject(),
+  updateMyAccount: () => Promise.reject(),
+  deleteAuthor: () => Promise.reject(),
 });
 
 // Helper function for error handling
@@ -76,162 +88,134 @@ const handleError = (error: AxiosError<ErrorResponse>, setErr: React.Dispatch<Re
   }
 };
 
-export default function NewsProvider({ children }: { children: ReactNode }) {
-  const [news, setNews] = useState<News[]>([]);
-  const [currentArticle, setCurrentArticle] = useState<News | null>(null);
-  const [articlesPublished, setArticlesPublished] = useState<News[] | []>([]);
-  const [categoryArticles, setCategoryArticles] = useState<News[] | []>([]);
+export default function AuthProvider({ children }: { children: ReactNode }) {
+  const [auth, setAuth] = useState<Auth>({ user: { name: "", profilePhoto: "", email: "", role: "", _id: "" }, isLoggedIn: false });
+  const [err, setErr] = useState<Error>({ isErr: false, message: "", statusCode: 200, type: "" });
+  const [authCheck, setAuthCheck] = useState<{ isLoading: boolean; isAuthenticated: boolean }>({ isLoading: true, isAuthenticated: false });
+  const [resetStatus, setResetStatus] = useState<boolean>(false);
+  const [users, setUsers] = useState<User[] | []>([]);
 
-  const [err, setErr] = useState<Error>({
-    isErr: false,
-    message: "",
-    statusCode: 200,
-    type: "",
-  });
+  useEffect(() => {
+    if (JSON.parse(sessionStorage.getItem("checkLoginStatus") as string)?.isLoggedIn) {
+      onRefresh();
+    } else {
+      setAuthCheck({ isAuthenticated: false, isLoading: false });
+    }
+  }, [window.location]);
 
-  const { err: authErr, setErr: setAuthErr } = useAuth();
-
-  // Function to get an individual article by id
-  const getArticle = async (id: string): Promise<News | false> => {
+  // Refresh user authentication
+  const onRefresh = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/articles/${id}`, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.get(`${BASE_URL}/users/refresh`, { withCredentials: true, headers: { "Content-Type": "application/json" } });
+      setAuth({ user: response.data.currentUser, isLoggedIn: true });
+      setAuthCheck({ isAuthenticated: true, isLoading: false });
+      setErr({ ...err, isErr: false, message: "", type: "", statusCode: 200 });
+    } catch (error) {
+      if (error instanceof AxiosError) handleError(error, setErr);
+      setAuthCheck({ isAuthenticated: false, isLoading: false });
+    }
+  };
 
+  // Log in a user
+  const logIn = async (email: string, password: string) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/users/login`,
+        { email, password },
+        { withCredentials: true, headers: { "Content-Type": "application/json" } }
+      );
       if (response.status === 200) {
-        return response.data.data.article;
-      }
-
-      return false;
-    } catch (error) {
-      if (error instanceof AxiosError) handleError(error, setErr);
-      return false;
-    }
-  };
-
-  // Fetch articles published by a specific user
-  const getArticlesPublishedBy = async (userId: string) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/articles/publishedBy/${userId}`, {
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.data.results > 0) {
+        setAuth({ user: response.data.user, isLoggedIn: true });
+        setAuthCheck({ isAuthenticated: true, isLoading: false });
+        sessionStorage.setItem("checkLoginStatus", JSON.stringify({ isLoggedIn: true }));
         setErr({ ...err, isErr: false, message: "", type: "", statusCode: 200 });
-        setArticlesPublished(response.data.articles);
       }
     } catch (error) {
       if (error instanceof AxiosError) handleError(error, setErr);
     }
   };
 
-  // Post a new article
-  const postArticle = async (article: FormData): Promise<boolean> => {
+  // Forgot password
+  const forgotPassword = async (email: string) => {
     try {
-      const response = await axios.post(`${BASE_URL}/articles`, article, {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
-      });
+      const response = await axios.post(`${BASE_URL}/users/forgotPassword`, { email }, { headers: { "Content-Type": "application/json" } });
+      if (response.status === 200) {
+        setErr({ ...err, isErr: false, message: "", type: "", statusCode: 200 });
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) handleError(error, setErr);
+    }
+  };
 
+  // Reset password
+  const resetPassword = async (password: string, passwordConfirm: string, token: string) => {
+    try {
+      const response = await axios.patch(`${BASE_URL}/users/resetPassword/${token}`, { password, passwordConfirm }, { headers: { "Content-Type": "application/json" } });
+      if (response.status === 200) {
+        setResetStatus(true);
+        setErr({ ...err, isErr: false, message: "", type: "", statusCode: 200 });
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) handleError(error, setErr);
+    }
+  };
+
+  // Log out user
+  const logout = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/users/logout`, { withCredentials: true, headers: { "Content-Type": "application/json" } });
+      if (response.status === 200) {
+        setAuth({ user: { name: "", profilePhoto: "", email: "", role: "", _id: "" }, isLoggedIn: false });
+        sessionStorage.clear();
+        setAuthCheck({ isAuthenticated: false, isLoading: false });
+        setErr({ ...err, isErr: false, message: "", type: "", statusCode: 200 });
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) handleError(error, setErr);
+    }
+  };
+
+  // Add a new author
+  const addNewAuthor = async (credentials: { name: string; email: string; password: string; passwordConfirm: string }) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/users/addAuthor`, credentials, { withCredentials: true, headers: { "Content-Type": "application/json" } });
       if (response.status === 200) {
         setErr({ ...err, isErr: false, message: "", type: "", statusCode: 200 });
         return true;
       }
-
       return false;
     } catch (error) {
       if (error instanceof AxiosError) handleError(error, setErr);
       return false;
-    }
-  };
-
-  // Delete an article by id
-  const deleteArticle = async (id: string): Promise<boolean> => {
-    try {
-      await axios.delete(`${BASE_URL}/articles/${id}`, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
-
-      return true;
-    } catch (error) {
-      if (error instanceof AxiosError) handleError(error, setErr);
-      return false;
-    }
-  };
-
-  // Update an article by id
-  const updateArticle = async (id: string, data: { title?: string; body?: string; categories?: string }): Promise<boolean> => {
-    try {
-      const response = await axios.patch(`${BASE_URL}/articles/${id}`, data, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
-
-      if (response.status === 200) {
-        setErr({ ...err, isErr: false, message: "", type: "", statusCode: 200 });
-        return true;
-      }
-
-      return false;
-    } catch (error) {
-      if (error instanceof AxiosError) handleError(error, setErr);
-      return false;
-    }
-  };
-
-  // Fetch articles by category
-  const getArticlesByCategories = async (category: string) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/articles/category/${category}`, {
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.status === 200) {
-        setCategoryArticles(response.data.data.articles);
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) handleError(error, setErr);
-    }
-  };
-
-  // Fetch front page news articles
-  const getFrontPageNews = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/articles/frontPageNews`, {
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.status === 200) {
-        setNews(response.data.articles);
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) handleError(error, setErr);
     }
   };
 
   return (
-    <NewsContext.Provider
+    <AuthContext.Provider
       value={{
-        news,
-        setNews,
-        setCurrentArticle,
-        currentArticle,
-        getArticle,
-        getArticlesPublishedBy,
-        postArticle,
-        deleteArticle,
-        updateArticle,
-        articlesPublished,
-        setArticlesPublished,
-        categoryArticles,
-        setCategoryArticles,
-        getArticlesByCategories,
-        getFrontPageNews,
+        auth,
+        setAuth,
+        err,
+        setErr,
+        users,
+        setUsers,
+        logIn,
+        forgotPassword,
+        resetPassword,
+        resetStatus,
+        setResetStatus,
+        logout,
+        updatePassword: async () => false,
+        onRefresh,
+        authCheck,
+        setAuthCheck,
+        addNewAuthor,
+        updateMyAccount: async () => false,
+        getAllUsers: async () => {},
+        deleteAuthor: async () => false,
       }}
     >
       {children}
-    </NewsContext.Provider>
+    </AuthContext.Provider>
   );
 }
-
