@@ -17,7 +17,7 @@ const ArticlePage = () => {
     useEffect( () => {
         axios({
             method: "GET",
-            url: `https://news-api-qsji.onrender.com/api/v1/articles/${articleID.id}`, 
+            url: `https://backend-final-self.vercel.app/api/v1/articles/${articleID.id}`, 
             headers: 
                 {  
                     'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const ArticlePage = () => {
 
             <div className = {`article--body part--${index}`}>
                 <Markdown>{text}</Markdown>
-                <img className={`article--image img--${index}`} src={`https://news-api-qsji.onrender.com/images/${images.splice(0,1)}`} />
+                <img className={`article--image img--${index}`} src={`https://backend-final-self.vercel.app/images/${images.splice(0,1)}`} />
             </div>
             
             )
@@ -81,7 +81,7 @@ const ArticlePage = () => {
 
         if(images.length > 0) {
             
-            images.forEach((image) => renderedContent.push(<img className='article--image end--images' src={`https://news-api-qsji.onrender.com/images/${image}`} />))
+            images.forEach((image) => renderedContent.push(<img className='article--image end--images' src={`https://backend-final-self.vercel.app/images/${image}`} />))
         }
         
     } 
