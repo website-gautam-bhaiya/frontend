@@ -27,7 +27,7 @@ const Carousel = () => {
     useEffect( () => {
         axios({
             method: "GET",
-            url: `https://news-api-qsji.onrender.com/api/v1/articles/nivesh-top`,
+            url: `https://backend-final-self.vercel.app/api/v1/articles/nivesh-top`,
             headers: 
                 {
                     'Access-Control-Allow-Origin': '*',
