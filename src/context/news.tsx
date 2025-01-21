@@ -17,7 +17,12 @@ interface News {
   _id: string;
   title: string;
   body: string;
-  imageCover: string; articleImages?: string[]; preview?: string; categories: string; subCategory?: string; publishedOn: string; 
+  imageCover: string; 
+  articleImages?: string[];
+  preview?: string;
+  categories: string;
+  subCategory?: string;
+  publishedOn: string; 
   views: number; 
 }
 
