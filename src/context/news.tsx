@@ -69,101 +69,91 @@ export default function NewsProvider({ children }: { children: ReactNode }) {
     const [categoryArticles, setCategoryArticles] = useState<News[]>([]);
     const { err, setErr } = useAuth();
 
-    // Helper function to handle errors
-    const handleError = (error: unknown, customMessage: string = "An error occurred.") => {
+    const handleError = (error: unknown, message: string) => {
         console.error("Error:", error);
         if (error instanceof AxiosError) {
             setErr({
                 ...err,
                 isErr: true,
-                message: error.response?.data?.message || customMessage,
-                type: error.response?.status === 400 ? "ValidationError" : "UnknownError",
-                statusCode: error.response?.status || 500
+                message: error.response?.data?.message || message,
+                type: "Error",
+                statusCode: error.response?.status || 500,
             });
-        } else {
-            setErr({ ...err, isErr: true, message: customMessage, type: "UnknownError", statusCode: 500 });
         }
     };
 
-    // Axios instance
     const axiosInstance = axios.create({
         baseURL: BASE_URL,
         headers: { "Content-Type": "application/json" },
-        withCredentials: true
+        withCredentials: true,
     });
 
-    // Fetch articles for the front page
     const getFrontPageNews = async () => {
         try {
             const response = await axiosInstance.get(`/articles/frontPageNews`);
-            if (response.data?.articles && Array.isArray(response.data.articles)) {
-                setNews(response.data.articles);
+            const articles = response.data?.articles;
+            if (Array.isArray(articles)) {
+                setNews(articles);
             } else {
-                console.warn("Invalid data received for front page news:", response.data);
-                setNews([]);
+                console.warn("Invalid articles data:", articles);
+                setNews([]); // Fallback to empty array if data is invalid
             }
         } catch (error) {
             handleError(error, "Failed to fetch front page news.");
         }
     };
 
-    // Fetch a single article by ID
     const getArticle = async (id: string): Promise<News | false> => {
         try {
             const response = await axiosInstance.get(`/articles/${id}`);
             return response.data?.data?.article || false;
         } catch (error) {
-            handleError(error, "Failed to fetch the article.");
+            handleError(error, "Failed to fetch article.");
             return false;
         }
     };
 
-    // Fetch articles published by a specific user
     const getArticlesPublishedBy = async (userId: string) => {
         try {
             const response = await axiosInstance.get(`/articles/publishedBy/${userId}`);
             setArticlesPublished(response.data?.articles || []);
         } catch (error) {
-            handleError(error, "Failed to fetch articles published by the user.");
+            handleError(error, "Failed to fetch articles published by user.");
         }
     };
 
-    // Post a new article
     const postArticle = async (article: FormData): Promise<boolean> => {
         try {
             const response = await axiosInstance.post(`/articles`, article, {
-                headers: { "Content-Type": "multipart/form-data" }
+                headers: { "Content-Type": "multipart/form-data" },
             });
             return response.status === 200;
         } catch (error) {
-            handleError(error, "Failed to post the article.");
+            handleError(error, "Failed to post article.");
             return false;
         }
     };
 
-    // Delete an article by ID
     const deleteArticle = async (id: string): Promise<boolean> => {
         try {
             await axiosInstance.delete(`/articles/${id}`);
             return true;
         } catch (error) {
-            handleError(error, "Failed to delete the article.");
+            handleError(error, "Failed to delete article.");
             return false;
         }
     };
 
-    // Update an article by ID
     const updateArticle = async (id: string, data: { title?: string; body?: string; categories?: string }): Promise<boolean> => {
         try {
             const response = await axiosInstance.patch(`/articles/${id}`, data);
             return response.status === 200;
         } catch (error) {
-            handleError(error, "Failed to update the article.");
+            handleError(error, "Failed to update article.");
             return false;
         }
     };
 
-    // Fetch articles by category
     const getArticlesByCategories = async (category: string) => {
         try {
             const response = await axiosInstance.get(`/articles/category/${category}`);
@@ -174,7 +164,6 @@ export default function NewsProvider({ children }: { children: ReactNode }) {
     };
 
     useEffect(() => {
-        // Fetch front page news when the provider is mounted
         getFrontPageNews();
     }, []);
 
@@ -195,7 +184,7 @@ export default function NewsProvider({ children }: { children: ReactNode }) {
                 categoryArticles,
                 setCategoryArticles,
                 getArticlesByCategories,
-                getFrontPageNews
+                getFrontPageNews,
             }}
         >
             {children}
