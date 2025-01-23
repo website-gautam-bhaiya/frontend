@@ -2,7 +2,7 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css' 
-import NewsProvider from './context/news.js'
+import NewsProvider from './context/news.tsx'
 import StocksProvider from './context/stocks.tsx'
 import AuthProvider from './context/auth.tsx'
 import BooksProvider from './context/book.tsx'
