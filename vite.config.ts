@@ -1,21 +1,15 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: "/", // Ensures correct base path for routing
   server: {
-    host: true,
-    port: 3000,
-    strictPort: true
+    proxy: {
+      "/api": {
+        target: "https://backend-final-self.vercel.app", // Backend URL
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
-  build: {
-    outDir: "dist", // Ensure Vercel picks the correct folder
-    sourcemap: true
-  },
-  resolve: {
-    alias: {
-      "@": "/src" // Clean import paths
-    }
-  }
-});
+})
