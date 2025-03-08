@@ -1,15 +1,17 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      "/api": {
-        target: "https://backend-final-self.vercel.app", // Backend URL
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
+  base: '/',
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html'
+      }
+    }
   },
-})
+  server: {
+    historyApiFallback: true
+  }
+});
