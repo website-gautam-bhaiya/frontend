@@ -1,17 +1,29 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react' 
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+
   build: {
-    outDir: "dist", // Ensures output is placed in "dist"
+    outDir: "dist", // Ensure Vercel picks up the correct build folder
+    sourcemap: true, // Helpful for debugging
   },
+
   server: {
-    https: {
-      key: './../ssl--certificates/decrypted-key.pem',
-      cert: './../ssl--certificates/cert.pem'
+    host: true, // Ensures Vercel can bind to the correct host
+    port: 3000, // Default Vite port (can be changed if needed)
+    strictPort: true, // Prevents port conflicts
+    open: false, // Prevents browser auto-opening on local dev
+  },
+
+  resolve: {
+    alias: {
+      "@": "/src", // Helps with cleaner imports like "@/components/Button"
     },
-    historyApiFallback: true, // 👈 Ensures React Router handles routing correctly
-  }
-})
+  },
+
+  define: {
+    "process.env": {}, // Ensures process.env is handled correctly
+  },
+});
