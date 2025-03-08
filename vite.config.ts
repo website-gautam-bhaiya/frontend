@@ -6,12 +6,14 @@ export default defineConfig({
   base: '/',
   build: {
     rollupOptions: {
-      input: {
-        main: 'index.html'
-      }
+      input: 'index.html' // Ensure index.html is correctly used
     }
   },
   server: {
-    historyApiFallback: true
+    host: true, // Allows external access (useful in some cases)
+    port: 3000, // You can change this if needed
+  },
+  preview: {
+    port: 4173, // Default Vite preview port
   }
 });
